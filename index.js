@@ -1,5 +1,5 @@
 const fs = require('fs');
-const inquire = require('inquire');
+const inquirer = require('inquirer');
 const { Triangle, Circle, Square } = require('./lib/shapes');
 
 const questions = [
@@ -13,12 +13,12 @@ const questions = [
         type: 'input',
         name: 'text',
         message: 'Type three letters to display.',
-        validate: (answer) => {
-            if (answer.length > 3) {
-                return console.log('\n Too many characters.');
-            }
-            return true;
-        }
+        // validate: (answer) => {
+        //     if (answer.text > 3) {
+        //         return console.log('\n Too many characters.');
+        //     }
+        //     return true;
+        // }
     },
     {
         type: 'input',
@@ -49,11 +49,11 @@ function renderShape(response) {
 
 function createSVG(response) {
     let svg = renderShape(response);
-    fs.writeFile('./examples/logo.svg', svg);
+    fs.writeFile('./examples/logo.svg', svg, () => console.log('logo generated'));
 }
 
 function init() {
-    inquire.prompt(questions).then((response) => {
+    inquirer.prompt(questions).then((response) => {
         createSVG(response);
     })
 }

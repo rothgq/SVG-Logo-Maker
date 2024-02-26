@@ -31,3 +31,31 @@ const questions = [
         message: 'Enter a keyword or hexadecimal number for your background color.',
     }
 ]
+
+function renderShape(response) {
+    if (response.shape === 'Triangle') {
+        let newShape = new Triangle ( response.text, response.textColor, response.shapeColor )
+        return newShape.render()
+    }
+    if (response.shape === 'Circle') {
+        let newShape = new Circle( response.text, response.textColor, response.shapeColor )
+        return newShape.render()
+    }
+    if (response.shape === 'Square') {
+        let newShape = new Square( response.text, response.textColor, response.shapeColor )
+        return newShape.render()
+    }
+};
+
+function createSVG(response) {
+    let svg = renderShape(response);
+    fs.writeFile('./examples/logo.svg', svg);
+}
+
+function init() {
+    inquire.prompt(questions).then((response) => {
+        createSVG(response);
+    })
+}
+
+init();

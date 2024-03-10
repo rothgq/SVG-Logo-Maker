@@ -49,7 +49,7 @@ function renderShape(response) {
 
 function createSVG(response) {
     let svg = renderShape(response);
-    fs.writeFile('./examples/logo.svg', svg, () => console.log('logo generated'));
+    fs.writeFile('./examples/logo.svg', svg, () => console.log('Generated logo.svg'));
 }
 
 function init() {
